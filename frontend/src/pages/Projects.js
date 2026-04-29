@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import EmptyState from "../components/EmptyState";
 import LoadingState from "../components/LoadingState";
@@ -13,7 +13,7 @@ const Projects = () => {
   const [form, setForm] = useState({ name: "", description: "" });
   const [memberEmails, setMemberEmails] = useState({});
 
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     setLoading(true);
     try {
       setProjects(await request("/api/projects"));
@@ -22,11 +22,11 @@ const Projects = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [request]);
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [fetchProjects]);
 
   const createProject = async (event) => {
     event.preventDefault();

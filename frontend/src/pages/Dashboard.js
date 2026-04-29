@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import Badge from "../components/Badge";
 import EmptyState from "../components/EmptyState";
@@ -29,7 +29,7 @@ const Dashboard = () => {
   const [filters, setFilters] = useState({ status: "", priority: "", project: "" });
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -45,11 +45,11 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters, request]);
 
   useEffect(() => {
     fetchData();
-  }, [filters.status, filters.priority, filters.project]);
+  }, [fetchData]);
 
   const stats = useMemo(() => ({
     total: tasks.length,

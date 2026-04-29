@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
 const AuthContext = createContext(null);
 const API_URL = process.env.REACT_APP_API_URL;
@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  const request = async (path, options = {}) => {
+  const request = useCallback(async (path, options = {}) => {
     if (!API_URL) {
       throw new Error("REACT_APP_API_URL is not configured");
     }
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return data;
-  };
+  }, [token]);
 
   const saveSession = (payload) => {
     localStorage.setItem("token", payload.token);
@@ -42,21 +42,21 @@ export const AuthProvider = ({ children }) => {
     setUser(payload.user);
   };
 
-  const register = async (form) => {
+  const register = useCallback(async (form) => {
     const payload = await request("/api/auth/register", {
       method: "POST",
       body: JSON.stringify(form)
     });
     saveSession(payload);
-  };
+  }, [request]);
 
-  const login = async (form) => {
+  const login = useCallback(async (form) => {
     const payload = await request("/api/auth/login", {
       method: "POST",
       body: JSON.stringify(form)
     });
     saveSession(payload);
-  };
+  }, [request]);
 
   const logout = () => {
     localStorage.removeItem("token");

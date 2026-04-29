@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import Badge from "../components/Badge";
 import EmptyState from "../components/EmptyState";
@@ -28,7 +28,7 @@ const Tasks = () => {
     return projects.find((project) => project._id === form.project);
   }, [projects, form.project]);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const [taskData, projectData] = await Promise.all([
@@ -42,11 +42,11 @@ const Tasks = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [request]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const createTask = async (event) => {
     event.preventDefault();
