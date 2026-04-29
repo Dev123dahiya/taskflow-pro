@@ -81,6 +81,18 @@ const Projects = () => {
 
   return (
     <>
+      <section className="mb-6 grid overflow-hidden rounded-md border border-slate-200 bg-white shadow-soft lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="p-6">
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Project portfolio</p>
+          <h1 className="mt-2 text-2xl font-bold text-slate-950">Build a cleaner operating rhythm</h1>
+          <p className="mt-3 text-sm leading-6 text-slate-600">Keep every project connected to the people responsible for the work, then assign tasks only to the right team members.</p>
+        </div>
+        <div
+          className="hidden min-h-48 bg-cover bg-center lg:block"
+          style={{ backgroundImage: "linear-gradient(90deg, rgba(255,255,255,0.1), rgba(15,23,42,0.2)), url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80')" }}
+        />
+      </section>
+
       <PageHeader
         eyebrow="Project management"
         title="Projects"
@@ -88,7 +100,7 @@ const Projects = () => {
       />
 
       {isAdmin && (
-        <form onSubmit={createProject} className="mb-6 rounded-md border border-slate-200 bg-white p-4 shadow-sm">
+        <form onSubmit={createProject} className="mb-6 rounded-md border border-slate-200 bg-white/90 p-4 shadow-sm backdrop-blur">
           <div className="grid gap-3 md:grid-cols-[1fr_2fr_auto]">
             <input className="form-input" placeholder="Project name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} required />
             <input className="form-input" placeholder="Project description" value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} required />
@@ -102,7 +114,9 @@ const Projects = () => {
       ) : (
         <div className="grid gap-4 xl:grid-cols-2">
           {projects.map((project) => (
-            <article key={project._id} className="rounded-md border border-slate-200 bg-white p-5 shadow-sm">
+            <article key={project._id} className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
+              <div className="h-2" style={{ background: "linear-gradient(90deg, var(--accent), var(--accent-dark))" }} />
+              <div className="p-5">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h2 className="text-lg font-bold text-slate-950">{project.name}</h2>
@@ -138,6 +152,7 @@ const Projects = () => {
                   <button className="btn-secondary" type="button" onClick={() => addMember(project._id)}>Add Member</button>
                 </div>
               )}
+              </div>
             </article>
           ))}
         </div>

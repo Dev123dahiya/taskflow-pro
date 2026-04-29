@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import BrandLogo from "../components/BrandLogo";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
@@ -26,10 +27,11 @@ const Login = () => {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4 py-10">
-      <section className="w-full max-w-md rounded-md bg-white p-8 shadow-soft">
-        <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Team Task Manager</p>
+    <main className="auth-visual flex min-h-screen items-center justify-center px-4 py-10">
+      <section className="w-full max-w-md rounded-md bg-white/95 p-8 shadow-soft backdrop-blur">
+        <BrandLogo />
         <h1 className="mt-2 text-2xl font-bold text-slate-950">Sign in to your workspace</h1>
+        <p className="mt-2 text-sm text-slate-600">A focused place for projects, priorities, and team follow-through.</p>
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <label className="block">
             <span className="text-sm font-semibold text-slate-700">Email</span>

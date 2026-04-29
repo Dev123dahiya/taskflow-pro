@@ -87,6 +87,20 @@ const Tasks = () => {
 
   return (
     <>
+      <section className="mb-6 overflow-hidden rounded-md border border-slate-200 bg-white shadow-soft">
+        <div className="grid lg:grid-cols-[0.85fr_1.15fr]">
+          <div
+            className="hidden min-h-52 bg-cover bg-center lg:block"
+            style={{ backgroundImage: "linear-gradient(90deg, rgba(15,23,42,0.3), rgba(15,23,42,0.05)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80')" }}
+          />
+          <div className="p-6">
+            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Task pipeline</p>
+            <h1 className="mt-2 text-2xl font-bold text-slate-950">Focus the next move</h1>
+            <p className="mt-3 text-sm leading-6 text-slate-600">Priority, status, owner, and due date stay visible so every handoff has context.</p>
+          </div>
+        </div>
+      </section>
+
       <PageHeader
         eyebrow="Task management"
         title="Tasks"
@@ -94,7 +108,7 @@ const Tasks = () => {
       />
 
       {isAdmin && (
-        <form onSubmit={createTask} className="mb-6 rounded-md border border-slate-200 bg-white p-4 shadow-sm">
+        <form onSubmit={createTask} className="mb-6 rounded-md border border-slate-200 bg-white/90 p-4 shadow-sm backdrop-blur">
           <div className="grid gap-3 lg:grid-cols-2">
             <input className="form-input" placeholder="Task title" value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} required />
             <input className="form-input" placeholder="Task description" value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} required />
@@ -127,7 +141,9 @@ const Tasks = () => {
       ) : (
         <div className="grid gap-4">
           {tasks.map((task) => (
-            <article key={task._id} className={`rounded-md border p-5 shadow-sm ${task.status === "Overdue" ? "border-red-200 bg-red-50" : "border-slate-200 bg-white"}`}>
+            <article key={task._id} className={`overflow-hidden rounded-md border shadow-sm ${task.status === "Overdue" ? "border-red-200 bg-red-50" : "border-slate-200 bg-white"}`}>
+              <div className="h-1.5" style={{ background: task.status === "Overdue" ? "#ef4444" : "var(--accent)" }} />
+              <div className="p-5">
               <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                 <div>
                   <h2 className="text-lg font-bold text-slate-950">{task.title}</h2>
@@ -149,6 +165,7 @@ const Tasks = () => {
                   </select>
                   {isAdmin && <button className="btn-danger" type="button" onClick={() => deleteTask(task._id)}>Delete</button>}
                 </div>
+              </div>
               </div>
             </article>
           ))}

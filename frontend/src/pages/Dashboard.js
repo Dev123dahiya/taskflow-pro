@@ -9,9 +9,9 @@ import { useAuth } from "../context/AuthContext";
 const StatCard = ({ label, value, tone }) => {
   const tones = {
     slate: "border-slate-200 bg-white text-slate-950",
-    green: "border-green-200 bg-green-50 text-green-800",
-    blue: "border-blue-200 bg-blue-50 text-blue-800",
-    red: "border-red-200 bg-red-50 text-red-800"
+    green: "border-emerald-200 bg-emerald-50 text-emerald-800",
+    blue: "border-sky-200 bg-sky-50 text-sky-800",
+    red: "border-rose-200 bg-rose-50 text-rose-800"
   };
 
   return (
@@ -62,6 +62,14 @@ const Dashboard = () => {
 
   return (
     <>
+      <section className="visual-hero mb-6 overflow-hidden rounded-md p-6 text-white shadow-soft">
+        <div className="max-w-2xl">
+          <p className="text-xs font-bold uppercase tracking-wide text-white/75">{user?.role === "admin" ? "Admin overview" : "My workload"}</p>
+          <h1 className="mt-2 text-3xl font-bold">Work that moves together</h1>
+          <p className="mt-3 text-sm leading-6 text-white/85">Plan projects, assign clear ownership, and keep overdue work visible before it becomes a blocker.</p>
+        </div>
+      </section>
+
       <PageHeader
         eyebrow={user?.role === "admin" ? "Admin overview" : "My workload"}
         title="Dashboard"
@@ -75,7 +83,7 @@ const Dashboard = () => {
         <StatCard label="Overdue" value={stats.overdue} tone="red" />
       </div>
 
-      <section className="mt-6 rounded-md border border-slate-200 bg-white p-4 shadow-sm">
+      <section className="mt-6 rounded-md border border-slate-200 bg-white/90 p-4 shadow-sm backdrop-blur">
         <div className="grid gap-3 md:grid-cols-3">
           <select className="form-input" value={filters.status} onChange={(event) => setFilters({ ...filters, status: event.target.value })}>
             <option value="">All statuses</option>
@@ -101,7 +109,7 @@ const Dashboard = () => {
         {tasks.length === 0 ? (
           <EmptyState title="No tasks found" message="Tasks matching the selected filters will appear here." />
         ) : (
-          <div className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
+          <div className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-soft">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-slate-200 text-sm">
                 <thead className="bg-slate-50 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
