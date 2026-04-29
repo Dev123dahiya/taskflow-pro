@@ -58,12 +58,12 @@ export const AuthProvider = ({ children }) => {
     saveSession(payload);
   }, [request]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setToken(null);
     setUser(null);
-  };
+  }, []);
 
   const value = useMemo(() => ({
     API_URL,
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
     logout,
     register,
     request
-  }), [token, user]);
+  }), [login, logout, register, request, token, user]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
