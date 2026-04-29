@@ -1,6 +1,6 @@
 Team Task Manager
 
-A production-ready full-stack Team Task Manager web application for creating projects, assigning tasks to team members, and tracking progress with Admin and Member role-based access control.
+A full-stack task management application for creating projects, assigning work to team members, and tracking progress with Admin and Member role-based access control.
 
 Tech Stack
 - Frontend: React.js, Tailwind CSS
@@ -107,11 +107,11 @@ Vercel Frontend:
 5. Add the Vercel frontend URL to Railway as CLIENT_URL.
 
 Live URL
-- Frontend: Add your Vercel URL here
-- Backend: Add your Railway URL here
+- Frontend: Not deployed yet
+- Backend: Not deployed yet
 
 GitHub Repo Link
 - https://github.com/Dev123dahiya/taskflow-pro.git
 
 Demo Video Link
-- Add your demo video URL here
+- Not recorded yet

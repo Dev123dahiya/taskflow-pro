@@ -1,7 +1,7 @@
 {
   "name": "team-task-manager-backend",
   "version": "1.0.0",
-  "description": "Express and MongoDB API for the Team Task Manager assessment app.",
+  "description": "Express and MongoDB API for Team Task Manager.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
